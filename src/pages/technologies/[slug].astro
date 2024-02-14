@@ -1,0 +1,24 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Image from 'astro/components/Image.astro';
+
+const { slug } = Astro.params;
+if (!slug) throw new Error('Slug not found');
+const tech = await getEntry('technologies', slug);
+
+if (!tech) throw new Error('No post found for this slug');
+const { Content } = await tech.render();
+
+// Generate static pages
+export async function getStaticPaths() {
+  const technologies = await getCollection('technologies');
+  return technologies.map(tech => ({ params: { slug: tech.slug } }));
+}
+---
+
+<Layout title={tech.data.title}>
+  <h1>{tech.data.title}</h1>
+  <Image src={tech.data.icon} alt={''} height={100} width={100}/>
+  <Content />
+</Layout>

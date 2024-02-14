@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const posts = await getCollection('posts');
+const technologies = await getCollection('technologies');
+
+---
+
+<Layout title="Viacheslav Orlov">
+  <div>
+    <h1>Viacheslav Orlov</h1>
+    <p>
+      Fullstack developer
+    </p>
+    {process.env.DEV_MODE && <p>
+      <a href="/keystatic">Click here to visit the Admin UI</a>, or the link
+      below to view a post in the collection.
+    </p>}
+
+    <h2>Technologies</h2>
+    <ul>
+      {
+        technologies.map(item => (
+          <li>
+            <a href={`/technologies/${item.slug}`}>{item.data.title}</a>
+            </li>
+        ))
+      }
+    </ul>
+
+    <h2>Posts</h2>
+    <ul>
+      {
+        posts.map(post => (
+          <li>
+            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Layout>
