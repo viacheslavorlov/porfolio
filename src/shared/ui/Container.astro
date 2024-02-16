@@ -1,0 +1,8 @@
+---
+import { maxWidth } from '../const/ui-const';
+const { className } = Astro.props;
+---
+
+<div class={`mx-auto px-4 md:px-6 lg:px-8 w-full max-w-[${maxWidth}px] ${className}`}>
+	<slot />
+</div>

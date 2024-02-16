@@ -1,43 +1,68 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import Section from '../shared/ui/Section.astro';
+import Container from '../shared/ui/Container.astro';
+import { getEntry } from 'astro:content';
 
 const posts = await getCollection('posts');
 const technologies = await getCollection('technologies');
-
+const data = await getCollection('main-page');
+const pageData = data[0];
 ---
 
-<Layout title="Viacheslav Orlov">
-  <div>
-    <h1>Viacheslav Orlov</h1>
-    <p>
-      Fullstack developer
-    </p>
-    {process.env.DEV_MODE && <p>
-      <a href="/keystatic">Click here to visit the Admin UI</a>, or the link
-      below to view a post in the collection.
-    </p>}
-
-    <h2>Technologies</h2>
-    <ul>
-      {
-        technologies.map(item => (
-          <li>
-            <a href={`/technologies/${item.slug}`}>{item.data.title}</a>
-            </li>
-        ))
-      }
-    </ul>
-
-    <h2>Posts</h2>
-    <ul>
-      {
-        posts.map(post => (
-          <li>
-            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
+<Layout title={pageData.data.title}>
+	<Section>
+		<Container className={'flex flex-col items-end justify-end'}>
+			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600'>
+				<h1 class='text-3xl font-bold'>Viacheslav Orlov</h1>
+				<p class='text-lg text-right'>Fullstack developer</p>
+			</div>
+			{
+				process.env.DEV_MODE && (
+					<p>
+						<a href='/keystatic'>Click here to visit the Admin UI</a>, or the link below
+						to view a post in the collection.
+					</p>
+				)
+			}
+		</Container>
+	</Section>
+	<Section>
+		<Container>
+			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4'>
+				<h2 class='text-right text-lg italic'>
+					{pageData.body}
+				</h2>
+			</div>
+		</Container>
+	</Section>
+	<Section>
+		<Container>
+			<a href={'/technologies'}><h2>Technologies</h2></a>
+			<ul>
+				{
+					technologies.map(item => (
+						<li>
+							<a href={`/technologies/${item.slug}`}>{item.data.title}</a>
+						</li>
+					))
+				}
+			</ul>
+		</Container>
+	</Section>
+	<Section>
+		<Container>
+			<h2>Posts</h2>
+			<ul>
+				{
+					posts.map(post => (
+						<li>
+							<a href={`/posts/${post.slug}`}>{post.data.title}</a>
+						</li>
+					))
+				}
+			</ul>
+		</Container>
+	</Section>
 </Layout>

@@ -1,4 +1,4 @@
-import { config, fields, collection } from '@keystatic/core';
+import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
 	storage: {
@@ -45,4 +45,24 @@ export default config({
 			},
 		}),
 	},
+	singletons: {
+		main: singleton({
+		  label: 'MainPage',
+		  path: 'src/content/main-page',
+		  schema: {
+			title: fields.slug({ name: { label: 'Title' } }),
+			icon?: fields.text({ label: 'Icon' }),
+			content: fields.document({
+				label: 'Content',
+				formatting: true,
+				dividers: true,
+				links: true,
+				images: {
+					directory: 'src/assets/main-page/',
+					publicPath: '../../assets/main-page/',
+				},
+			}),
+
+		  }
+	   })
 });
