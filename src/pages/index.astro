@@ -1,13 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Section from '../shared/ui/Section.astro';
 import Container from '../shared/ui/Container.astro';
-import { getEntry } from 'astro:content';
+import Section from '../shared/ui/Section.astro';
+import ImageCarousel from '../shared/ui/Carusel/Carusel'
 
 const posts = await getCollection('posts');
 const technologies = await getCollection('technologies');
 const data = await getCollection('main-page');
+console.log('technologies', technologies);
 const pageData = data[0];
 ---
 
@@ -15,8 +16,8 @@ const pageData = data[0];
 	<Section>
 		<Container className={'flex flex-col items-end justify-end'}>
 			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600'>
-				<h1 class='text-3xl font-bold'>Viacheslav Orlov</h1>
-				<p class='text-lg text-right'>Fullstack developer</p>
+				<h1 class='text-3xl font-bold'>{pageData.data.title}</h1>
+				<p class='text-lg text-right'>{pageData.data.subtitle}</p>
 			</div>
 			{
 				process.env.DEV_MODE && (
@@ -30,9 +31,11 @@ const pageData = data[0];
 	</Section>
 	<Section>
 		<Container>
-			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4'>
-				<h2 class='text-right text-lg italic'>
-					{pageData.body}
+			<div class='rounded-lg backdrop:blur-md bg-black/60'>
+				<h2 class='flex justify-end text-right text-lg italic'>
+					<p class='w-auto ml-auto rounded-lg'>
+						"{pageData.body}"
+					</p>
 				</h2>
 			</div>
 		</Container>
@@ -40,15 +43,7 @@ const pageData = data[0];
 	<Section>
 		<Container>
 			<a href={'/technologies'}><h2>Technologies</h2></a>
-			<ul>
-				{
-					technologies.map(item => (
-						<li>
-							<a href={`/technologies/${item.slug}`}>{item.data.title}</a>
-						</li>
-					))
-				}
-			</ul>
+			<ImageCarousel technologies={technologies} client:load />
 		</Container>
 	</Section>
 	<Section>
@@ -66,3 +61,4 @@ const pageData = data[0];
 		</Container>
 	</Section>
 </Layout>
+../shared/ui/Carusel/Carusel

@@ -51,7 +51,7 @@ export default config({
 		  path: 'src/content/main-page',
 		  schema: {
 			title: fields.slug({ name: { label: 'Title' } }),
-			icon?: fields.text({ label: 'Icon' }),
+			icon: fields.text({ label: 'Icon' }),
 			content: fields.document({
 				label: 'Content',
 				formatting: true,
@@ -65,4 +65,5 @@ export default config({
 
 		  }
 	   })
+	}
 });

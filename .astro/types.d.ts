@@ -135,6 +135,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"main-page": {
+"content.mdoc": {
+	id: "content.mdoc";
+  slug: "viacheslav-orlov";
+  body: string;
+  collection: "main-page";
+  data: any
+} & { render(): Render[".mdoc"] };
 "index.mdoc": {
 	id: "index.mdoc";
   slug: "index";
