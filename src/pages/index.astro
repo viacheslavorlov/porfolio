@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { ArrowRight } from 'lucide-preact';
 import Layout from '~/layouts/Layout.astro';
 import Slider from '~/shared/ui/carusel/CaruselSplide.astro';
 import Container from '~/shared/ui/Container.astro';
@@ -8,7 +9,7 @@ import Section from '~/shared/ui/Section.astro';
 const posts = await getCollection('posts');
 const technologies = await getCollection('technologies');
 const data = await getCollection('main-page');
-console.log('technologies', technologies);
+// console.log('technologies', technologies);
 const pageData = data[0];
 ---
 
@@ -43,7 +44,8 @@ const pageData = data[0];
 	<Section>
 		
 		<Container>
-			<a href={'/technologies'}><h2>Technologies</h2></a>
+			<a href={'/technologies'} class="flex gap-2 items-center"><h2 class="text-2xl font-bold">Технологии которые я использую</h2> <ArrowRight/></a>
+
 		</Container>
 	</Section>
 	<Slider slides={technologies} />

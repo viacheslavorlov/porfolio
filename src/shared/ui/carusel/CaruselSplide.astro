@@ -11,15 +11,18 @@ const { slides } = Astro.props;
 		<ul class='splide__list'>
 			{
 				slides.map(slide => (
-					<li class='splide__slide h-32 '>
-						<div class='aspect-square rounded-lg h-full flex flex-col bg-gray-500 p-4'>
-							<a href={`/technologies/${slide.slug}`} />
-							<img
-								src={slide.data.icon}
-								alt={slide.data.title}
-								class='object-center  w-full h-full mx-auto rounded-lg'
-							/>
-							<p class='text-center'>{slide.data.title}</p>
+					<li class='splide__slide h-32'>
+						<div class='aspect-square rounded-lg h-full hover:bg-gray-500 bg-gray-800'>
+							<a
+								href={`/technologies/${slide.slug}`}
+								class='w-full h-full mx-auto p-4 flex flex-col' >
+								<img
+									src={slide.data.icon}
+									alt={slide.data.title}
+									class='object-center  w-full h-full mx-auto rounded-lg'
+								/>
+								<p class='text-center'>{slide.data.title}</p>
+							</a>
 						</div>
 					</li>
 				))
@@ -30,13 +33,7 @@ const { slides } = Astro.props;
 <script>
 	import Splide from '@splidejs/splide';
 	import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
-
 	let numSlides = 3;
-	function adjustSlidesNum() {
-		if (window.innerWidth <= 380) {
-			numSlides = 2;
-		}
-	}
 
 	const slider = new Splide('.splide', {
 		autoScroll: {
@@ -49,4 +46,28 @@ const { slides } = Astro.props;
 	});
 	// slider.Components.Arrows.destroy()
 	slider.mount({ AutoScroll });
+	console.log(window)
+	function adjustSlidesNum() {
+		slider.options.perPage
+		console.log('resize');
+		if (window.innerWidth <= 380) {
+			slider.options.perPage = 2;
+		}
+		if  (window.innerWidth > 380) {
+			slider.options.perPage = 3;
+		}
+		if  (window.innerWidth > 640) {
+			slider.options.perPage = 4;
+		}
+		if  (window.innerWidth > 940) {
+			slider.options.perPage = 6;
+		}
+		if  (window.innerWidth > 1280) {
+			slider.options.perPage = 8;
+		}
+	}
+	adjustSlidesNum()
+	window.addEventListener('resize', adjustSlidesNum)
+
+	
 </script>
