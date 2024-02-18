@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
-import Container from '../shared/ui/Container.astro';
-import Section from '../shared/ui/Section.astro';
-import ImageCarousel from '../shared/ui/Carusel/Carusel'
+import Layout from '~/layouts/Layout.astro';
+import Slider from '~/shared/ui/carusel/CaruselSplide.astro';
+import Container from '~/shared/ui/Container.astro';
+import Section from '~/shared/ui/Section.astro';
 
 const posts = await getCollection('posts');
 const technologies = await getCollection('technologies');
@@ -41,11 +41,13 @@ const pageData = data[0];
 		</Container>
 	</Section>
 	<Section>
+		
 		<Container>
 			<a href={'/technologies'}><h2>Technologies</h2></a>
-			<ImageCarousel technologies={technologies} client:load />
 		</Container>
 	</Section>
+	<Slider slides={technologies} />
+
 	<Section>
 		<Container>
 			<h2>Posts</h2>
@@ -61,4 +63,4 @@ const pageData = data[0];
 		</Container>
 	</Section>
 </Layout>
-../shared/ui/Carusel/Carusel
+../shared/ui/carusel/CaruselSplide.astro

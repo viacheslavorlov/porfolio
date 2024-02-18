@@ -160,6 +160,27 @@ declare module 'astro:content' {
 } & { render(): Render[".mdoc"] };
 };
 "technologies": {
+"1-react.mdoc": {
+	id: "1-react.mdoc";
+  slug: "1-react";
+  body: string;
+  collection: "technologies";
+  data: InferEntrySchema<"technologies">
+} & { render(): Render[".mdoc"] };
+"1-typescript.mdoc": {
+	id: "1-typescript.mdoc";
+  slug: "1-typescript";
+  body: string;
+  collection: "technologies";
+  data: InferEntrySchema<"technologies">
+} & { render(): Render[".mdoc"] };
+"next-js.mdoc": {
+	id: "next-js.mdoc";
+  slug: "next-js";
+  body: string;
+  collection: "technologies";
+  data: InferEntrySchema<"technologies">
+} & { render(): Render[".mdoc"] };
 "react.mdoc": {
 	id: "react.mdoc";
   slug: "react";
@@ -167,9 +188,9 @@ declare module 'astro:content' {
   collection: "technologies";
   data: InferEntrySchema<"technologies">
 } & { render(): Render[".mdoc"] };
-"typescript.mdoc": {
-	id: "typescript.mdoc";
-  slug: "typescript";
+"typescript-2.mdoc": {
+	id: "typescript-2.mdoc";
+  slug: "typescript-2";
   body: string;
   collection: "technologies";
   data: InferEntrySchema<"technologies">

@@ -1,0 +1,52 @@
+---
+import '@splidejs/splide/css';
+
+type Props = { slides: { data: { title: string; icon: string }; slug: string }[] };
+
+const { slides } = Astro.props;
+---
+
+<section class='splide w-screen'>
+	<div class='splide__track'>
+		<ul class='splide__list'>
+			{
+				slides.map(slide => (
+					<li class='splide__slide h-32 '>
+						<div class='aspect-square rounded-lg h-full flex flex-col bg-gray-500 p-4'>
+							<a href={`/technologies/${slide.slug}`} />
+							<img
+								src={slide.data.icon}
+								alt={slide.data.title}
+								class='object-center  w-full h-full mx-auto rounded-lg'
+							/>
+							<p class='text-center'>{slide.data.title}</p>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
+<script>
+	import Splide from '@splidejs/splide';
+	import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+
+	let numSlides = 3;
+	function adjustSlidesNum() {
+		if (window.innerWidth <= 380) {
+			numSlides = 2;
+		}
+	}
+
+	const slider = new Splide('.splide', {
+		autoScroll: {
+			speed: 1,
+		},
+		pagination: false,
+		arrows: false,
+		type: 'loop',
+		perPage: numSlides,
+	});
+	// slider.Components.Arrows.destroy()
+	slider.mount({ AutoScroll });
+</script>
