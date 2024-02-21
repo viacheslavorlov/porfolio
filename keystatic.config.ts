@@ -24,6 +24,27 @@ export default config({
 				}),
 			},
 		}),
+		phrases: collection({
+			label: 'Phrases',
+			slugField: 'title',
+			path: 'src/content/phrases/*',
+			format: { contentField: 'content' },
+			schema: {
+				title: fields.slug({ name: { label: 'Title' } }),
+				timeout: fields.number({label: 'Timeout'}),
+				icon: fields.image({label: 'Image'}),
+				content: fields.document({
+					label: 'Content',
+					formatting: true,
+					dividers: true,
+					links: true,
+					images: {
+						directory: 'src/assets/images/posts',
+						publicPath: '../../assets/images/posts/',
+					},
+				}),
+			},
+		}),
 		technologies: collection({
 			label: 'Technologies',
 			slugField: 'title',

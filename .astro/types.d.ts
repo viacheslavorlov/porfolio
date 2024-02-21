@@ -150,6 +150,29 @@ declare module 'astro:content' {
   data: any
 } & { render(): Render[".mdoc"] };
 };
+"phrases": {
+"1privet-kak-vashi-dela-dela.mdoc": {
+	id: "1privet-kak-vashi-dela-dela.mdoc";
+  slug: "1privet-kak-vashi-dela-dela";
+  body: string;
+  collection: "phrases";
+  data: any
+} & { render(): Render[".mdoc"] };
+"nuzhen-bystryj-adaptivnyj-sajt.mdoc": {
+	id: "nuzhen-bystryj-adaptivnyj-sajt.mdoc";
+  slug: "nuzhen-bystryj-adaptivnyj-sajt";
+  body: string;
+  collection: "phrases";
+  data: any
+} & { render(): Render[".mdoc"] };
+"vy-popali-po-adresu.mdoc": {
+	id: "vy-popali-po-adresu.mdoc";
+  slug: "vy-popali-po-adresu";
+  body: string;
+  collection: "phrases";
+  data: any
+} & { render(): Render[".mdoc"] };
+};
 "posts": {
 "first-post.mdoc": {
 	id: "first-post.mdoc";

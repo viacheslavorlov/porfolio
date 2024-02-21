@@ -5,6 +5,7 @@ import Layout from '~/layouts/Layout.astro';
 import Slider from '~/shared/ui/carusel/CaruselSplide.astro';
 import Container from '~/shared/ui/Container.astro';
 import Section from '~/shared/ui/Section.astro';
+import GreeatingsCards from '~/widgets/greetings-cards/GreetingsCards.astro'
 
 const posts = await getCollection('posts');
 const technologies = await getCollection('technologies');
@@ -16,20 +17,13 @@ const pageData = data[0];
 <Layout title={pageData.data.title}>
 	<Section>
 		<Container className={'flex flex-col items-end justify-end'}>
-			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600'>
+			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg '>
 				<h1 class='text-3xl font-bold'>{pageData.data.title}</h1>
 				<p class='text-lg text-right'>{pageData.data.subtitle}</p>
 			</div>
-			{
-				process.env.DEV_MODE && (
-					<p>
-						<a href='/keystatic'>Click here to visit the Admin UI</a>, or the link below
-						to view a post in the collection.
-					</p>
-				)
-			}
 		</Container>
 	</Section>
+	<GreeatingsCards client:load/>
 	<Section>
 		<Container>
 			<div class='rounded-lg backdrop:blur-md bg-black/60'>
@@ -65,4 +59,3 @@ const pageData = data[0];
 		</Container>
 	</Section>
 </Layout>
-../shared/ui/carusel/CaruselSplide.astro

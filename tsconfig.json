@@ -4,6 +4,7 @@
     "dist"
   ],
   "compilerOptions": {
+    "verbatimModuleSyntax": true,
     "allowJs": true,
     "baseUrl": ".",
     "paths": {

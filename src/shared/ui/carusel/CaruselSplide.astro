@@ -11,17 +11,17 @@ const { slides } = Astro.props;
 		<ul class='splide__list'>
 			{
 				slides.map(slide => (
-					<li class='splide__slide h-32'>
+					<li class='splide__slide h-24 w-24 md:h-32 md:w-32'>
 						<div class='aspect-square rounded-lg h-full hover:bg-gray-500 bg-gray-800'>
 							<a
 								href={`/technologies/${slide.slug}`}
-								class='w-full h-full mx-auto p-4 flex flex-col' >
+								class='w-full h-full mx-auto p-1.5 md:p-4 flex flex-col' >
 								<img
 									src={slide.data.icon}
 									alt={slide.data.title}
-									class='object-center  w-full h-full mx-auto rounded-lg'
+									class='object-center px-4 w-full h-full mx-auto rounded-lg'
 								/>
-								<p class='text-center'>{slide.data.title}</p>
+								<p class='text-center text-sm md:text-base'>{slide.data.title}</p>
 							</a>
 						</div>
 					</li>
