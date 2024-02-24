@@ -1,9 +1,16 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Container from '../../shared/ui/Container.astro';
 import Section from '../../shared/ui/Section.astro';
 
-const {title} = Astro.params
+const data = await getCollection('tech-page')
+
+const technologies = await getCollection('technologies')
+
+console.log('data', data)
+console.log('technologies', technologies)
+
 ---
 
 <Layout title=''>

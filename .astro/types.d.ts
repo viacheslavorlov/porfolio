@@ -134,23 +134,7 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"main-page": {
-"content.mdoc": {
-	id: "content.mdoc";
-  slug: "viacheslav-orlov";
-  body: string;
-  collection: "main-page";
-  data: any
-} & { render(): Render[".mdoc"] };
-"index.mdoc": {
-	id: "index.mdoc";
-  slug: "index";
-  body: string;
-  collection: "main-page";
-  data: any
-} & { render(): Render[".mdoc"] };
-};
-"phrases": {
+		"phrases": {
 "1privet-kak-vashi-dela-dela.mdoc": {
 	id: "1privet-kak-vashi-dela-dela.mdoc";
   slug: "1privet-kak-vashi-dela-dela";
@@ -183,16 +167,37 @@ declare module 'astro:content' {
 } & { render(): Render[".mdoc"] };
 };
 "technologies": {
-"1-react.mdoc": {
-	id: "1-react.mdoc";
-  slug: "1-react";
+"astro-js.mdoc": {
+	id: "astro-js.mdoc";
+  slug: "astro-js";
   body: string;
   collection: "technologies";
   data: InferEntrySchema<"technologies">
 } & { render(): Render[".mdoc"] };
-"1-typescript.mdoc": {
-	id: "1-typescript.mdoc";
-  slug: "1-typescript";
+"html-5.mdoc": {
+	id: "html-5.mdoc";
+  slug: "html-5";
+  body: string;
+  collection: "technologies";
+  data: InferEntrySchema<"technologies">
+} & { render(): Render[".mdoc"] };
+"java-script.mdoc": {
+	id: "java-script.mdoc";
+  slug: "java-script";
+  body: string;
+  collection: "technologies";
+  data: InferEntrySchema<"technologies">
+} & { render(): Render[".mdoc"] };
+"keystatic-cms.mdoc": {
+	id: "keystatic-cms.mdoc";
+  slug: "keystatic-cms";
+  body: string;
+  collection: "technologies";
+  data: InferEntrySchema<"technologies">
+} & { render(): Render[".mdoc"] };
+"next-js-1.mdoc": {
+	id: "next-js-1.mdoc";
+  slug: "next-js-1";
   body: string;
   collection: "technologies";
   data: InferEntrySchema<"technologies">
@@ -211,9 +216,23 @@ declare module 'astro:content' {
   collection: "technologies";
   data: InferEntrySchema<"technologies">
 } & { render(): Render[".mdoc"] };
-"typescript-2.mdoc": {
-	id: "typescript-2.mdoc";
-  slug: "typescript-2";
+"redux.mdoc": {
+	id: "redux.mdoc";
+  slug: "redux";
+  body: string;
+  collection: "technologies";
+  data: InferEntrySchema<"technologies">
+} & { render(): Render[".mdoc"] };
+"strapi-cms.mdoc": {
+	id: "strapi-cms.mdoc";
+  slug: "strapi-cms";
+  body: string;
+  collection: "technologies";
+  data: InferEntrySchema<"technologies">
+} & { render(): Render[".mdoc"] };
+"typescript.mdoc": {
+	id: "typescript.mdoc";
+  slug: "typescript";
   body: string;
   collection: "technologies";
   data: InferEntrySchema<"technologies">
@@ -223,7 +242,21 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
-		
+		"main-page": {
+"index": {
+	id: "index";
+  collection: "main-page";
+  data: any
+};
+};
+"tech-page": {
+"index": {
+	id: "index";
+  collection: "tech-page";
+  data: any
+};
+};
+
 	};
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;

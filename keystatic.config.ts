@@ -31,7 +31,7 @@ export default config({
 			format: { contentField: 'content' },
 			schema: {
 				title: fields.slug({ name: { label: 'Title' } }),
-				timeout: fields.number({label: 'Timeout'}),
+				timeout: fields.number({ label: 'Timeout' }),
 				content: fields.document({
 					label: 'Content',
 					formatting: true,
@@ -63,23 +63,24 @@ export default config({
 	},
 	singletons: {
 		main: singleton({
-		  label: 'MainPage',
-		  path: 'src/content/main-page',
-		  schema: {
-			title: fields.slug({ name: { label: 'Title' } }),
-			icon: fields.text({ label: 'Icon' }),
-			content: fields.document({
-				label: 'Content',
-				formatting: true,
-				dividers: true,
-				links: true,
-				images: {
-					directory: 'src/assets/main-page/',
-					publicPath: '../../assets/main-page/',
-				},
-			}),
-
-		  }
-	   })
-	}
+			label: 'MainPage',
+			path: 'src/content/main-page/',
+			schema: {
+				title: fields.text({ label: 'Title' }),
+				subTitle: fields.text({ label: 'Subtitle' }),
+				icon: fields.text({ label: 'Icon' }),
+				description: fields.text({label: 'Description'})
+			},
+		}),
+		tech: singleton({
+			label: 'Tech Page',
+			path: 'src/content/tech-page/',
+			schema: {
+				title: fields.text({ label: 'Title' }),
+				subTitle: fields.text({ label: 'Subtitle' }),
+				icon: fields.text({ label: 'Icon' }),
+				description: fields.text({label: 'Description'})
+			},
+		}),
+	},
 });

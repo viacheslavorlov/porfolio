@@ -5,12 +5,11 @@ import Layout from '../layouts/Layout.astro';
 import Slider from '../shared/ui/carusel/CaruselSplide.astro';
 import Container from '../shared/ui/Container.astro';
 import Section from '../shared/ui/Section.astro';
-import GreeatingsCards from '../widgets/GreetingsCards.astro'
+import GreeatingsCards from '../widgets/greetings/GreetingsCards.astro'
 
 const posts = await getCollection('posts');
 const technologies = await getCollection('technologies');
 const data = await getCollection('main-page');
-// console.log('technologies', technologies);
 const pageData = data[0];
 ---
 
@@ -19,17 +18,17 @@ const pageData = data[0];
 		<Container className={'flex flex-col items-end justify-end'}>
 			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg '>
 				<h1 class='text-3xl font-bold'>{pageData.data.title}</h1>
-				<p class='text-lg text-right'>{pageData.data.subtitle}</p>
+				<p class='text-lg text-right'>{pageData.data.subTitle}</p>
 			</div>
 		</Container>
 	</Section>
-	<GreeatingsCards client:load />
+	<GreeatingsCards />
 	<Section>
 		<Container>
 			<div class='rounded-lg backdrop:blur-md bg-black/60'>
 				<h2 class='flex justify-end text-right text-lg italic'>
 					<p class='w-auto ml-auto rounded-lg'>
-						{pageData.body}
+						"{pageData.data.description}"
 					</p>
 				</h2>
 			</div>
