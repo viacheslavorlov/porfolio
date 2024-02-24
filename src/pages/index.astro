@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import { ArrowRight } from 'lucide-preact';
-import Layout from '~/layouts/Layout.astro';
-import Slider from '~/shared/ui/carusel/CaruselSplide.astro';
-import Container from '~/shared/ui/Container.astro';
-import Section from '~/shared/ui/Section.astro';
-import GreeatingsCards from '~/widgets/greetings-cards/GreetingsCards.astro'
+import Layout from '../layouts/Layout.astro';
+import Slider from '../shared/ui/carusel/CaruselSplide.astro';
+import Container from '../shared/ui/Container.astro';
+import Section from '../shared/ui/Section.astro';
+import GreeatingsCards from '../widgets/GreetingsCards.astro'
 
 const posts = await getCollection('posts');
 const technologies = await getCollection('technologies');
@@ -23,13 +23,13 @@ const pageData = data[0];
 			</div>
 		</Container>
 	</Section>
-	<GreeatingsCards client:load/>
+	<GreeatingsCards client:load />
 	<Section>
 		<Container>
 			<div class='rounded-lg backdrop:blur-md bg-black/60'>
 				<h2 class='flex justify-end text-right text-lg italic'>
 					<p class='w-auto ml-auto rounded-lg'>
-						"{pageData.body}"
+						{pageData.body}
 					</p>
 				</h2>
 			</div>
@@ -51,7 +51,7 @@ const pageData = data[0];
 				{
 					posts.map(post => (
 						<li>
-							<a href={`/posts/${post.slug}`}>{post.data.title}</a>
+							<a class="button" href={`/posts/${post.slug}`}>{post.data.title}</a>
 						</li>
 					))
 				}
@@ -59,3 +59,18 @@ const pageData = data[0];
 		</Container>
 	</Section>
 </Layout>
+
+<style>
+	.button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    background-image: linear-gradient(to right, blue 0%, blue 50%, red 50%, red 100%);
+    background-size: 200% 100%;
+    transition: background-position 0.5s;
+}
+
+.button:hover {
+    background-position: -100% 0;
+}
+</style>

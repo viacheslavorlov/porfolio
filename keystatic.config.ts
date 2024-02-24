@@ -32,16 +32,11 @@ export default config({
 			schema: {
 				title: fields.slug({ name: { label: 'Title' } }),
 				timeout: fields.number({label: 'Timeout'}),
-				icon: fields.image({label: 'Image'}),
 				content: fields.document({
 					label: 'Content',
 					formatting: true,
 					dividers: true,
 					links: true,
-					images: {
-						directory: 'src/assets/images/posts',
-						publicPath: '../../assets/images/posts/',
-					},
 				}),
 			},
 		}),
