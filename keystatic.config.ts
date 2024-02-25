@@ -69,7 +69,7 @@ export default config({
 				title: fields.text({ label: 'Title' }),
 				subTitle: fields.text({ label: 'Subtitle' }),
 				icon: fields.text({ label: 'Icon' }),
-				description: fields.text({label: 'Description'})
+				description: fields.text({ label: 'Description' }),
 			},
 		}),
 		tech: singleton({
@@ -79,7 +79,21 @@ export default config({
 				title: fields.text({ label: 'Title' }),
 				subTitle: fields.text({ label: 'Subtitle' }),
 				icon: fields.text({ label: 'Icon' }),
-				description: fields.text({label: 'Description'})
+				description: fields.text({ label: 'Description' }),
+			},
+		}),
+		contacts: singleton({
+			label: 'Contacts',
+			path: 'src/content/contacts-page/',
+			schema: {
+				title: fields.text({ label: 'Title' }),
+				data: fields.array(
+					fields.object({
+						title: fields.text({ label: 'title' }),
+						contact: fields.text({ label: 'contact' }),
+						icon: fields.text({ label: 'icon' }),
+					})
+				),
 			},
 		}),
 	},

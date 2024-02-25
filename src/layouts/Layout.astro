@@ -33,7 +33,7 @@ const { title } = Astro.props;
 	</head>
 	<body style='margin: 0; background: #000;'>
 		<canvas class='-z-10 opacity-25 fixed top-0 left-0 w-screen h-screen object-cover'></canvas>
-		<main class="z-10 text-white w-full h-full overflow-auto">
+		<main class='z-10 text-white w-full h-full overflow-auto'>
 			<slot />
 		</main>
 	</body>
@@ -42,10 +42,10 @@ const { title } = Astro.props;
 			$ = C.getContext('2d')!,
 			W = (C.width = innerWidth),
 			H = (C.height = innerHeight);
-		const str = 'sf dfg sgrgjskg s r rgsrg* ? rkja | kg387313897 2',
+		const str = 'Viathceslav 1987 Orlov + Frontend Programmer & =>18.11',
 			matrix = str.split('');
 		let font = 16,
-			col = W / font * 1.4,
+			col = (W / font) * 1.4,
 			arr: number[] = [];
 		for (let i = 0; i < col; i++) arr[i] = Math.random() * H; // Initialize random starting positions
 
@@ -58,11 +58,16 @@ const { title } = Astro.props;
 				let txt = matrix[Math.floor(Math.random() * matrix.length)];
 				$.fillText(txt, i * font, arr[i]);
 				if (arr[i] > H && Math.random() > 0.5) arr[i] = 0;
-				arr[i] += Math.random() * 25; // Adjust the speed of falling characters
+				arr[i] += Math.random() * 20; // Adjust the speed of falling characters
 			}
 		}
 
-		setInterval(draw, 134);
+		setInterval(draw, 115);
 		// window.addEventListener('resize', () => location.reload())
 	</script>
 </html>
+<style is:global>
+	body {
+		font-family: 'JetBrainsMono', sans-serif;
+	}
+</style>

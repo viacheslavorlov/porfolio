@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../shared/ui/Section.astro';
+import Container from '../../shared/ui/Container.astro';
+import { Image } from 'astro:assets';
+
+// get singleton data
+const data = await getCollection('contacts-page');
+const pageData = data[0].data;
+
+console.log(pageData, data);
+---
+
+<Layout title={pageData.title}>
+	<Section>
+		<Container className='flex flex-col gap-8 justify-center align-middle'>
+			<h1
+				class='text-2xl font-bold text-center rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg w-48 mx-auto'>
+				{pageData.title}
+			</h1>
+
+			<div
+				class='flex flex-col gap-8 rounded-lg transition-all backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg'>
+				{
+					pageData.data.map((contact, i) => (
+						<div
+							class={`flex gap-4 items-center animate-[appear_${i}s] transition-all duration-500`}>
+							<Image
+								src={contact.icon}
+								alt={contact.title || ''}
+								height={100}
+								width={100}
+								class={'w-10 h-10 '}
+							/>
+							<div>{contact.title}: </div>
+							<a
+							target="_blank"	
+							class='hover:underline text-green-600 font-bold'
+								href={contact.contact}>
+								{contact.contact}
+							</a>
+						</div>
+					))
+				}
+			</div>
+		</Container>
+	</Section>
+</Layout>
+<style>
+	div {
+		font-family: 'JetBrainsMono';
+	}
+</style>

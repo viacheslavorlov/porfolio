@@ -174,6 +174,13 @@ declare module 'astro:content' {
   collection: "technologies";
   data: InferEntrySchema<"technologies">
 } & { render(): Render[".mdoc"] };
+"css-3.mdoc": {
+	id: "css-3.mdoc";
+  slug: "css-3";
+  body: string;
+  collection: "technologies";
+  data: InferEntrySchema<"technologies">
+} & { render(): Render[".mdoc"] };
 "html-5.mdoc": {
 	id: "html-5.mdoc";
   slug: "html-5";
@@ -191,13 +198,6 @@ declare module 'astro:content' {
 "keystatic-cms.mdoc": {
 	id: "keystatic-cms.mdoc";
   slug: "keystatic-cms";
-  body: string;
-  collection: "technologies";
-  data: InferEntrySchema<"technologies">
-} & { render(): Render[".mdoc"] };
-"next-js-1.mdoc": {
-	id: "next-js-1.mdoc";
-  slug: "next-js-1";
   body: string;
   collection: "technologies";
   data: InferEntrySchema<"technologies">
@@ -242,7 +242,14 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
-		"main-page": {
+		"contacts-page": {
+"index": {
+	id: "index";
+  collection: "contacts-page";
+  data: any
+};
+};
+"main-page": {
 "index": {
 	id: "index";
   collection: "main-page";

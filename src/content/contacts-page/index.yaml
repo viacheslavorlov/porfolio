@@ -1,0 +1,11 @@
+title: Контакты
+data:
+  - title: Telegram
+    contact: https://t.me/viacheslav_orlov_87
+    icon: /Telegram.png
+  - title: VK
+    contact: https://vk.com/id2282476
+    icon: /VK.png
+  - title: mail
+    contact: viacheslavorlov@gmail.com
+    icon: /email.svg

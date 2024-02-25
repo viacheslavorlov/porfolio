@@ -1,5 +1,6 @@
 ---
 import '@splidejs/splide/css';
+import { Image } from 'astro:assets';
 
 type Props = { slides: { data: { title: string; icon: string }; slug: string }[] };
 
@@ -15,8 +16,10 @@ const { slides } = Astro.props;
 						<div class='aspect-square rounded-lg h-full hover:bg-gray-500 bg-gray-800'>
 							<a
 								href={`/technologies/${slide.slug}`}
-								class='w-full h-full mx-auto p-1.5 md:p-4 flex flex-col' >
-								<img
+								class='w-full h-full mx-auto p-1.5 md:p-4 flex flex-col'>
+								<Image
+									width={'1000'}
+									height={'1000'}
 									src={slide.data.icon}
 									alt={slide.data.title}
 									class='object-center px-4 w-full h-full mx-auto rounded-lg'
@@ -46,28 +49,24 @@ const { slides } = Astro.props;
 	});
 	// slider.Components.Arrows.destroy()
 	slider.mount({ AutoScroll });
-	console.log(window)
 	function adjustSlidesNum() {
-		slider.options.perPage
-		console.log('resize');
+		slider.options.perPage;
 		if (window.innerWidth <= 380) {
 			slider.options.perPage = 2;
 		}
-		if  (window.innerWidth > 380) {
+		if (window.innerWidth > 380) {
 			slider.options.perPage = 3;
 		}
-		if  (window.innerWidth > 640) {
+		if (window.innerWidth > 640) {
 			slider.options.perPage = 4;
 		}
-		if  (window.innerWidth > 940) {
+		if (window.innerWidth > 940) {
 			slider.options.perPage = 6;
 		}
-		if  (window.innerWidth > 1280) {
+		if (window.innerWidth > 1280) {
 			slider.options.perPage = 8;
 		}
 	}
-	adjustSlidesNum()
-	window.addEventListener('resize', adjustSlidesNum)
-
-	
+	adjustSlidesNum();
+	window.addEventListener('resize', adjustSlidesNum);
 </script>

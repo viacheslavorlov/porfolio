@@ -3,20 +3,28 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Container from '../../shared/ui/Container.astro';
 import Section from '../../shared/ui/Section.astro';
+import {TechCard} from '../../entities/technology'
 
-const data = await getCollection('tech-page')
-
-const technologies = await getCollection('technologies')
-
-console.log('data', data)
-console.log('technologies', technologies)
-
+const data = await getCollection('tech-page');
+const pageData = data[0].data;
+const technologies = await getCollection('technologies');
 ---
 
-<Layout title=''>
+<Layout title={pageData.title}>
 	<Section>
 		<Container>
-			<h1>Technologies</h1>
+			<div
+				class='max-w-screen-md flex mx-auto flex-col justify-center rounded-lg transition-all backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg'>
+				<h1 class='text-2xl text-center'>{pageData.title}</h1>
+			</div>
+			<div class='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 py-8'>
+				{
+					technologies.map((tech, i) => (
+						<TechCard client:load tech={tech} i={i} />	
+					))
+				}
+			</div>
+			
 		</Container>
 	</Section>
 </Layout>

@@ -1,24 +1,22 @@
 ---
 import Section from '../../shared/ui/Section.astro';
 import Container from '../../shared/ui/Container.astro';
-import {getCollection} from 'astro:content';
-import {GreeatingsCard} from "../../entities/greetings";
+import { getCollection } from 'astro:content';
+import { GreeatingsCard } from '../../entities/greetings';
 
 const data = await getCollection('phrases');
-console.log(data);
 ---
 
 <Section>
-    <Container className='flex h-56 flex-col items-start justify-start gap-6'>
-        {
-            data.map(({data}) => (
-                    <GreeatingsCard
-                            title={data.title}
-                            timeout={data.timeout}
-							client:load
-
-                    />
-            ))
-        }
-    </Container>
+	<Container className='flex h-56 flex-col items-start justify-start gap-6'>
+		{
+			data.map(({ data }) => (
+				<GreeatingsCard
+					title={data.title}
+					timeout={data.timeout}
+					client:load
+				/>
+			))
+		}
+	</Container>
 </Section>

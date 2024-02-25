@@ -1,0 +1,1 @@
+export {TechCard} from './ui/TechCard'
