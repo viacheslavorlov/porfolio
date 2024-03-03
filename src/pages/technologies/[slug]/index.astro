@@ -2,6 +2,9 @@
 import { getCollection, getEntry } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 import Image from 'astro/components/Image.astro';
+import Container from 'src/shared/ui/Container.astro';
+import Section from 'src/shared/ui/Section.astro';
+import { ArrowBigLeftDash, ArrowBigRight, ArrowLeft } from 'lucide-preact';
 
 const { slug } = Astro.params;
 if (!slug) throw new Error('Slug not found');
@@ -12,13 +15,63 @@ const { Content } = await tech.render();
 
 // Generate static pages
 export async function getStaticPaths() {
-  const technologies = await getCollection('technologies');
-  return technologies.map(tech => ({ params: { slug: tech.slug } }));
+	const technologies = await getCollection('technologies');
+	return technologies.map(tech => ({ params: { slug: tech.slug } }));
 }
 ---
 
 <Layout title={tech.data.title}>
-  <h1>{tech.data.title}</h1>
-  <Image src={tech.data.icon} alt={''} height={100} width={100}/>
-  <Content />
+	<Section>
+		<Container className='flex flex-col justify-center items-center gap-4 md:gap-8 lg:gap-12 transition-all'>
+			<div
+				class='flex justify-evenly items-center w-3/4 animate-[appear_0.3s_linear] bg-bg-main border border-accent p-4 rounded-lg'>
+				<h1 class='text-4xl font-bold'>
+					{tech.data.title}
+				</h1>
+				<div class='animate-pulse hover:scale-105'>
+					<ArrowBigRight
+						client:load
+						color='green'
+						size={80}
+						strokeWidth={2}
+					/>
+				</div>
+
+				<Image
+					src={tech.data.icon}
+					alt={''}
+					height={100}
+					width={100}
+				/>
+			</div>
+			<div class='bg-bg-main animate-[appear_0.9  s_ease-in-out] p-4 md:p-6 lg:p-8 rounded-lg'>
+				<Content />
+			</div>
+			<a
+				href='/technologies'
+				class='flex animate-[appear_1.5s_linear]   gap-4 self-end bg-bg-main border border-accent px-4 py-2 rounded-lg hover:scale-105'
+				>
+        <ArrowLeft/>
+        <p>Назад</p>
+        </a
+			>
+		</Container>
+	</Section>
 </Layout>
+
+<style is:inline>
+	a {
+		color: green;
+	}
+
+  @keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
