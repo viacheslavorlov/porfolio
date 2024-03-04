@@ -5,7 +5,8 @@ import Layout from '../layouts/Layout.astro';
 import Slider from '../shared/ui/carusel/CaruselSplide.astro';
 import Container from '../shared/ui/Container.astro';
 import Section from '../shared/ui/Section.astro';
-import GreeatingsCards from '../widgets/greetings/GreetingsCards.astro'
+import GreeatingsCards from '../widgets/greetings/GreetingsCards.astro';
+import SmallCard from 'src/entities/post/ui/SmallCard.astro';
 
 const posts = await getCollection('posts');
 const technologies = await getCollection('technologies');
@@ -16,7 +17,8 @@ const pageData = data[0];
 <Layout title={pageData.data.title}>
 	<Section>
 		<Container className={'flex flex-col items-end justify-end'}>
-			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg'>
+			<div
+				class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg'>
 				<h1 class='text-3xl font-bold'>{pageData.data.title}</h1>
 				<p class='text-lg text-right'>{pageData.data.subTitle}</p>
 			</div>
@@ -35,41 +37,50 @@ const pageData = data[0];
 		</Container>
 	</Section>
 	<Section>
-		
 		<Container>
-			<a href={'/technologies'} class="flex gap-2 items-center"><h2 class="text-2xl font-bold">Технологии которые я использую</h2> <ArrowRight/></a>
-
+			<a
+				href={'/technologies'}
+				class='flex gap-2 items-center'
+				><h2 class='text-2xl font-bold'>Технологии которые я использую</h2>
+				<ArrowRight /></a
+			>
 		</Container>
 	</Section>
 	<Slider slides={technologies} />
 
 	<Section>
 		<Container>
-			<h2>Posts</h2>
-			<ul>
+			<h2 class='text-2xl font-bold'>Посты</h2>
+			<div>
 				{
 					posts.map(post => (
-						<li>
-							<a class="button" href={`/posts/${post.slug}`}>{post.data.title}</a>
-						</li>
+						<a href={'posts/' + post.slug} class=" w-full">
+							<SmallCard
+								title={post.data.title}
+								description={post.body}
+							/>
+						</a>
+						// <li>
+						// 	<a class="button" href={`/posts/${post.slug}`}>{post.data.title}</a>
+						// </li>
 					))
 				}
-			</ul>
+			</div>
 		</Container>
 	</Section>
 </Layout>
 
-<style>
-	.button {
-    background-color: blue;
-    color: white;
-    padding: 10px 20px;
-    background-image: linear-gradient(to right, blue 0%, blue 50%, red 50%, red 100%);
-    background-size: 200% 100%;
-    transition: background-position 0.5s;
-}
+<style is:global>
+	.filling {
+		/* background-color: blue; */
+		color: white;
+		padding: 10px 20px;
+		background-image: linear-gradient(to right, blue 0%, blue 50%, green 50%, green 100%);
+		background-size: 200% 100%;
+		transition: background-position 0.5s;
+	}
 
-.button:hover {
-    background-position: -100% 0;
-}
+	.filling:hover {
+		background-position: -100% 0;
+	}
 </style>
