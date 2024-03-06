@@ -24,4 +24,4 @@ export const TechCard = ({ tech, i }: {tech: CollectionEntry<'technologies'>, i:
 			</div>
 		</a>
 	);
-};
+}; 	

@@ -1,8 +1,19 @@
 ---
-import Container from '../../shared/ui/Container.astro'
-
+import { menuItems } from 'src/shared/const/menu-items';
+import Container from '../../shared/ui/Container.astro';
 ---
 
 <Container>
-	
+	<div
+		class='ml-auto hidden text-lg w-full items-start justify-end gap-10 md:flex lg:items-center'>
+		{
+			menuItems.map(item => (
+				<a
+					class='hover:underline text-xl'
+					href={item.href}>
+					{item.lable}
+				</a>
+			))
+		}
+	</div>
 </Container>

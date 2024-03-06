@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../shared/ui/Section.astro';
+import Container from '../shared/ui/Container.astro';
+import Flex from '../shared/ui/Flex.astro';
+import { ArrowLeft } from 'lucide-preact';
+---
+
+<Layout title='Нет такого маршрута'>
+	<Section>
+		<Container className={'max-w-[648px]'}>
+			<Flex
+				adaptive={false}
+				className='gap-4 md:gap-8 lg:gap-12'>
+				<h1
+					class='text-3xl md:text-5xl font-extrabold text-accent text-center leading-relaxed tracking-widest animate-[appear_0.2s_linear] '>
+					Ошибка 404
+				</h1>
+				<h2
+					class='text-2xl md:text-3xl text-accent text-center leading-relaxed tracking-widest animate-[appear_0.7s_linear]'>
+					Если вы перешли по ссылке внутри сайта и увидели это - не переживайте, сайт всё
+					ещё на стадии разработки
+				</h2>
+
+				<a
+					href='/technologies'
+					class='flex animate-[appear_1.2s_linear] gap-4 self-end bg-bg-main border border-accent px-4 py-2 rounded-lg hover:scale-105'>
+					<ArrowLeft />
+					<p>Назад</p>
+				</a>
+			</Flex>
+		</Container>
+	</Section>
+</Layout>
