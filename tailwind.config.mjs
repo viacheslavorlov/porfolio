@@ -5,10 +5,20 @@ export default {
 		extend: {
 			keyframes: {
 				appear: {
-					'0%': { opacity: 0 },
-					'100%': { opacity: 1 },
+					'0%': { opacity: 0, transform: 'translateY(20px)' },
+					'100%': { opacity: 1, transform: 'translateY(0px)' },
 				},
 			},
+			animation: {
+				appear: 'appear 0.5s linear '
+			},
+			colors: {
+				'text-color': '#fff',
+				'accent': 'rgb(22, 163, 74)',
+				'bg-main': 'rgb(31, 41, 55)',
+				'bg-accent': '#000'
+
+			}
 		},	
 	},
 	plugins: [],

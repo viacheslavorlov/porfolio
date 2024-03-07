@@ -1,0 +1,17 @@
+---
+import Menu from 'src/widgets/menu/Menu.astro';
+import MobileMenu from './MobileMenu';
+import Section from './Section.astro';
+
+const { phone } = Astro.props;
+---
+
+<Section class={'width-screen relative bg-primary-bg'}>
+	<div class='mx-auto w-full max-w-[1400px] flex justify-between items-center gap-10 p-4'>
+		<div class='md:flex justify-center items-center hidden mr-auto font-semibold gap-2 w-full'>
+			<Menu/>
+		</div>
+
+		<MobileMenu client:load />
+	</div>
+</Section>

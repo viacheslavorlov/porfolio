@@ -1,12 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import { ArrowRight } from 'lucide-preact';
-import {Layout} from '../layouts';
-import Slider from '../shared/ui/carusel/CaruselSplide.astro';
+import SmallCard from 'src/entities/post/ui/SmallCard.astro';
+import { Layout } from '../layouts';
+import { reader } from '../shared/lib/reader.ts';
 import Container from '../shared/ui/Container.astro';
 import Section from '../shared/ui/Section.astro';
-import GreeatingsCards from '../widgets/greetings/GreetingsCards.astro'
-import {reader} from '../shared/lib/reader.ts'
+import Slider from '../shared/ui/carusel/CaruselSplide.astro';
+import GreeatingsCards from '../widgets/greetings/GreetingsCards.astro';
 
 const posts = await getCollection('posts');
 const technologies = await reader.collections.technologies.all();
@@ -37,41 +38,50 @@ const data = await reader.singletons.main.read()
 		</Container>
 	</Section>
 	<Section>
-		
 		<Container>
-			<a href={'/technologies'} class="flex gap-2 items-center"><h2 class="text-2xl font-bold">Технологии которые я использую</h2> <ArrowRight/></a>
-
+			<a
+				href={'/technologies'}
+				class='flex gap-2 items-center'
+				><h2 class='text-2xl font-bold'>Технологии которые я использую</h2>
+				<ArrowRight /></a
+			>
 		</Container>
 	</Section>
 	<Slider slides={technologies?.map((item) => ({...item.entry}))} />
 
 	<Section>
 		<Container>
-			<h2>Posts</h2>
-			<ul>
+			<h2 class='text-2xl font-bold'>Посты</h2>
+			<div>
 				{
 					posts.map(post => (
-						<li>
-							<a class="button" href={`/posts/${post.slug}`}>{post.data.title}</a>
-						</li>
+						<a href={'posts/' + post.slug} class=" w-full">
+							<SmallCard
+								title={post.data.title}
+								description={post.body}
+							/>
+						</a>
+						// <li>
+						// 	<a class="button" href={`/posts/${post.slug}`}>{post.data.title}</a>
+						// </li>
 					))
 				}
-			</ul>
+			</div>
 		</Container>
 	</Section>
 </Layout>
 
-<style>
-	.button {
-    background-color: blue;
-    color: white;
-    padding: 10px 20px;
-    background-image: linear-gradient(to right, blue 0%, blue 50%, red 50%, red 100%);
-    background-size: 200% 100%;
-    transition: background-position 0.5s;
-}
+<style is:global>
+	.filling {
+		/* background-color: blue; */
+		color: white;
+		padding: 10px 20px;
+		background-image: linear-gradient(to right, blue 0%, blue 50%, green 50%, green 100%);
+		background-size: 200% 100%;
+		transition: background-position 0.5s;
+	}
 
-.button:hover {
-    background-position: -100% 0;
-}
+	.filling:hover {
+		background-position: -100% 0;
+	}
 </style>

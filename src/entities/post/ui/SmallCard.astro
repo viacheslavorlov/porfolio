@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import { shortenText } from '../../../shared/lib/shortenText';
+
+const { title, descriprion, image } = Astro.props;
+---
+
+<div class='w-full bg-bg-main'>
+	<h3>{title}</h3>
+	{image && <Image
+		src={image}
+		alt={title}
+		height={150}
+		width={150}
+	/>}
+	<p>{shortenText(descriprion, 40, true)}</p>
+</div>
