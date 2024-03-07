@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { ArrowRight } from 'lucide-preact';
-import Layout from '../layouts/Layout.astro';
+import {Layout} from '../layouts';
 import Slider from '../shared/ui/carusel/CaruselSplide.astro';
 import Container from '../shared/ui/Container.astro';
 import Section from '../shared/ui/Section.astro';
@@ -11,6 +11,7 @@ const posts = await getCollection('posts');
 const technologies = await getCollection('technologies');
 const data = await getCollection('main-page');
 const pageData = data[0];
+
 ---
 
 <Layout title={pageData.data.title}>
@@ -18,7 +19,7 @@ const pageData = data[0];
 		<Container className={'flex flex-col items-end justify-end'}>
 			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg'>
 				<h1 class='text-3xl font-bold'>{pageData.data.title}</h1>
-				<p class='text-lg text-right'>{pageData.data.subTitle}</p>
+				<p class='text-lg text-right'>{pageData.data}</p>
 			</div>
 		</Container>
 	</Section>
