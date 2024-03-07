@@ -6,20 +6,21 @@ import Slider from '../shared/ui/carusel/CaruselSplide.astro';
 import Container from '../shared/ui/Container.astro';
 import Section from '../shared/ui/Section.astro';
 import GreeatingsCards from '../widgets/greetings/GreetingsCards.astro'
+import {reader} from '../shared/lib/reader.ts'
 
 const posts = await getCollection('posts');
-const technologies = await getCollection('technologies');
-const data = await getCollection('main-page');
-const pageData = data[0];
+const technologies = await reader.collections.technologies.all();
+const data = await reader.singletons.main.read()
+
 
 ---
 
-<Layout title={pageData.data.title}>
+<Layout title={data?.title}>
 	<Section>
 		<Container className={'flex flex-col items-end justify-end'}>
 			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg'>
-				<h1 class='text-3xl font-bold'>{pageData.data.title}</h1>
-				<p class='text-lg text-right'>{pageData.data}</p>
+				<h1 class='text-3xl font-bold'>{data?.title}</h1>
+				<p class='text-lg text-right'>{data?.subTitle}</p>
 			</div>
 		</Container>
 	</Section>
@@ -29,7 +30,7 @@ const pageData = data[0];
 			<div class='rounded-lg backdrop:blur-md bg-black/60'>
 				<h2 class='flex justify-end text-right text-lg italic'>
 					<p class='w-auto ml-auto rounded-lg'>
-						"{pageData.data.description}"
+						"{data?.description}"
 					</p>
 				</h2>
 			</div>
@@ -42,7 +43,7 @@ const pageData = data[0];
 
 		</Container>
 	</Section>
-	<Slider slides={technologies} />
+	<Slider slides={technologies?.map((item) => ({...item.entry}))} />
 
 	<Section>
 		<Container>
