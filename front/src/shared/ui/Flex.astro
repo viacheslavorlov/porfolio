@@ -1,26 +1,28 @@
 ---
 import { clsx } from 'clsx';
 type Props = {
-	align?: 'cener' | 'start' | 'end';
-	justify?: 'cener' | 'start' | 'end' | 'between';
+	align?: 'center' | 'start' | 'end';
+	justify?: 'center' | 'start' | 'end' | 'between';
 	direction?: 'col' | 'row';
 	adaptive?: boolean;
 	children?: any;
 	className?: string;
+	gap?: number;
 };
 
 const {
 	adaptive = true,
 	direction = 'col',
-	align = 'cener',
-	justify = 'cener',
-	className
+	align = 'center',
+	justify = 'center',
+	gap = 4,
+	className,
 }: Props = Astro.props;
 ---
 
 <div
 	class={clsx(
-		`flex justify-${justify} items-${align}`,
+		`flex justify-${justify} items-${align} gap-${gap}`,
 		adaptive ? 'flex-col md:flex-row' : 'flex-' + direction,
 		className
 	)}>

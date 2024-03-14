@@ -1,7 +1,35 @@
 ---
-const {className} = Astro.props;
+import { clsx } from 'clsx';
+type Paddings = [number, number, number];
+type Props = {
+	className?: string;
+	paddings?: Paddings;
+};
+
+const { className, paddings = [4, 8, 12] } = Astro.props;
+function generatePaddingClasses(paddings: number[]): string {
+	let result = '';
+	paddings.forEach((padding, index) => {
+		switch (index) {
+			case 0:
+				result += `py-${padding} `;
+				break;
+			case 1:
+				result += `md:py-${padding} `;
+				break;
+			case 2:
+				result += `lg:py-${padding} `;
+				break;
+			default:
+				break;
+		}
+	});
+	return result;
+}
+
+const p = generatePaddingClasses(paddings);
 ---
 
-<section class=`w-full py-4 md:py-6 lg:py-8 ${className}`>
-	<slot/>
+<section class={clsx('mx-auto  w-full', p, className)}>
+	<slot />
 </section>

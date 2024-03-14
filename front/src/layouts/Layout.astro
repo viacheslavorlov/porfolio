@@ -1,6 +1,7 @@
 ---
 import Header from 'src/shared/ui/Header.astro';
 import '../styles.css';
+import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
 	title?: string;
@@ -10,8 +11,11 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='ru'>
+<html
+	lang='ru'
+	transition:animate='none'>
 	<head>
+		<ViewTransitions />
 		<meta charset='UTF-8' />
 		<meta
 			name='description'
@@ -32,50 +36,57 @@ const { title } = Astro.props;
 		/>
 		<title>{title}</title>
 	</head>
-	<body class='m-0 bg-bg-accent text-text-color'>
-		<canvas class='-z-10 opacity-25 fixed top-0 left-0 w-screen h-screen object-cover'></canvas>
-		<header>
+	<body
+		transition:persist
+class='m-0 bg-bg-accent text-text-color h-full min-h-screen'>
+		<canvas
+			transition:persist
+			class='-z-10 opacity-25 fixed top-0 left-0 w-screen h-screen object-cover'
+		></canvas>
+		<header transition:persist>
 			<Header />
 		</header>
-		<main class='z-10 text-white w-full h-full overflow-auto'>
+		<main
+			transition:animate='slide'
+			class='z-10 text-white w-full h-full'>
 			<slot />
 		</main>
-	</body>
-	<script>
-		const C = document.querySelector('canvas')!,
-			$ = C.getContext('2d')!,
-			W = (C.width = innerWidth),
-			H = (C.height = innerHeight);
-		const str = 'Viathceslav 1987 Orlov + Frontend Programmer & =>18.11',
-			matrix = str.split('');
-		let font = 16,
-			col = (W / font) * 1.4,
-			arr: number[] = [];
-		for (let i = 0; i < col; i++) arr[i] = Math.random() * H; // Initialize random starting positions
+		<script>
+			const C = document.querySelector('canvas')!,
+				$ = C.getContext('2d')!,
+				W = (C.width = innerWidth),
+				H = (C.height = innerHeight);
+			const str = 'Viathceslav 1987 Orlov + Frontend Programmer & =>18.11',
+				matrix = str.split('');
+			let font = 16,
+				col = (W / font) * 1.4,
+				arr: number[] = [];
+			for (let i = 0; i < col; i++) arr[i] = Math.random() * H; // Initialize random starting positions
 
-		function draw() {
-			$.fillStyle = 'rgba(0, 0, 0, .05)';
-			$.fillRect(0, 0, W, H);
-			$.fillStyle = '#0f0';
-			$.font = font + 'px system-ui';
-			for (let i = 0; i < arr.length; i++) {
-				let txt = matrix[Math.floor(Math.random() * matrix.length)];
-				$.fillText(txt, i * font, arr[i]);
-				if (arr[i] > H && Math.random() > 0.5) arr[i] = 0;
-				arr[i] += Math.random() * 20; // Adjust the speed of falling characters
+			function draw() {
+				$.fillStyle = 'rgba(0, 0, 0, .05)';
+				$.fillRect(0, 0, W, H);
+				$.fillStyle = '#0f0';
+				$.font = font + 'px system-ui';
+				for (let i = 0; i < arr.length; i++) {
+					let txt = matrix[Math.floor(Math.random() * matrix.length)];
+					$.fillText(txt, i * font, arr[i]);
+					if (arr[i] > H && Math.random() > 0.5) arr[i] = 0;
+					arr[i] += Math.random() * 20; // Adjust the speed of falling characters
+				}
 			}
-		}
 
-		setInterval(draw, 115);
-		// window.addEventListener('resize', () => location.reload())
-	</script>
+			setInterval(draw, 115);
+			// window.addEventListener('resize', () => location.reload())
+		</script>
+		<style is:global>
+			body {
+				font-family: 'JetBrainsMono', sans-serif;
+				transition: all 200ms;
+			}
+			a {
+				color: green;
+			}
+		</style>
+	</body>
 </html>
-<style is:global>
-	body {
-		font-family: 'JetBrainsMono', sans-serif;
-		transition: all 200ms;
-	}
-	a {
-		color: green;
-	}
-</style>

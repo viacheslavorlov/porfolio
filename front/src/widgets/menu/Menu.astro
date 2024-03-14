@@ -9,6 +9,7 @@ import Container from '../../shared/ui/Container.astro';
 		{
 			menuItems.map(item => (
 				<a
+					data-astro-reload={item.href === '/' ? true : false}
 					class='hover:underline text-xl'
 					href={item.href}>
 					{item.lable}

@@ -1,7 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import { ArrowRight } from 'lucide-preact';
+import { marked } from 'marked';
+import { Fragment } from 'preact';
 import SmallCard from 'src/entities/post/ui/SmallCard.astro';
+import fetchApi from 'src/shared/lib/strapi';
+import Flex from 'src/shared/ui/Flex.astro';
 import { Layout } from '../layouts';
 import { reader } from '../shared/lib/reader.ts';
 import Container from '../shared/ui/Container.astro';
@@ -9,17 +12,24 @@ import Section from '../shared/ui/Section.astro';
 import Slider from '../shared/ui/carusel/CaruselSplide.astro';
 import GreeatingsCards from '../widgets/greetings/GreetingsCards.astro';
 
-const posts = await reader.collections.posts.all();
+// const posts = await reader.collections.posts.all();
 const technologies = await reader.collections.technologies.all();
-const data = await reader.singletons.main.read()
+const data = await reader.singletons.main.read();
 
-
+const posts = await fetchApi({
+	endpoint: 'posts',
+	query: {
+		populate: '*',
+	},
+	wrappedByKey: 'data',
+});
 ---
 
 <Layout title={data?.title}>
-	<Section>
-		<Container className={'flex flex-col items-end justify-end'}>
-			<div class='rounded-lg backdrop:blur-md bg-black/70 p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg'>
+	<Section paddings={[2, 4, 4]}>
+<Container className={'flex flex-col items-center md:items-end justify-end'}>
+			<div
+				class='rounded-lg backdrop:blur-md bg-black/70 p-4 border-2 border-green-600 shadow-green-600 shadow-lg'>
 				<h1 class='text-3xl font-bold'>{data?.title}</h1>
 				<p class='text-lg text-right'>{data?.subTitle}</p>
 			</div>
@@ -47,28 +57,40 @@ const data = await reader.singletons.main.read()
 			>
 		</Container>
 	</Section>
-	<Slider slides={technologies}/>
+	<Slider
+		slides={technologies}
+		transition:persist-props
+	/>
 
-	<!-- <Section>
-		<Container>
-			<h2 class='text-2xl font-bold'>Посты</h2>
-			<div>
+	<Section>
+		<Container className={'flex flex-col gap-8'}>
+			<a
+				class='bg-bg-main w-fit rounded-lg p-4 border-1 border-accent'
+				href={'/posts'}>
+				<h2 class='text-2xl font-bold flex gap-4 items-center'>
+					Посты <span><ArrowRight /></span>
+				</h2>
+			</a>
+			<Flex className='flex-wrap'>
 				{
-					posts.map(post => (
-						<a href={'posts/' + post.slug} class=" w-full">
+					posts?.map(post => (
+						<a
+							href={'posts/' + post.attributes.slug}
+							class='w-fit rounded-lg p-4 bg-bg-main'>
 							<SmallCard
-								title={post.data.title}
-								description={post.body}
-							/>
+								title={post.attributes.title}
+								description={post.attributes.content}>
+								<Fragment set:html={marked.parse(post.attributes.content)} />
+							</SmallCard>
 						</a>
 						// <li>
 						// 	<a class="button" href={`/posts/${post.slug}`}>{post.data.title}</a>
 						// </li>
 					))
 				}
-			</div>
+			</Flex>
 		</Container>
-	</Section> -->
+	</Section>
 </Layout>
 
 <style is:global>

@@ -14,17 +14,17 @@ const technologies = await getCollection('technologies');
 	<Section>
 		<Container>
 			<div
-				class='max-w-screen-md flex mx-auto flex-col justify-center rounded-lg transition-all backdrop:blur-md bg-bg-main p-4 ring-2 ring-green-600 shadow-green-600 shadow-lg'>
+				class='max-w-screen-md flex mx-auto flex-col justify-center rounded-lg transition-all backdrop:blur-md bg-bg-main p-4 border-2 border-green-600 shadow-green-600 shadow-lg'>
 				<h1 class='text-2xl text-center font-extrabold'>{pageData.title}</h1>
 			</div>
 			<div class='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 py-8'>
 				{
 					technologies.map((tech, i) => (
-						<TechCard client:load tech={tech} i={i} />	
+						<TechCard client:load tech={tech} i={i} />
 					))
 				}
 			</div>
-			
+
 		</Container>
 	</Section>
 </Layout>

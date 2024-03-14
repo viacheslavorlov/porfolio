@@ -1,7 +1,38 @@
 ---
-const { className } = Astro.props;
+import { clsx } from 'clsx';
+type Paddings = [number, number, number];
+type Props = {
+	className?: string;
+	maxWidth?: number;
+	paddings?: Paddings;
+};
+
+const { className, maxWidth = 1280, paddings = [4, 8, 12] } = Astro.props;
+function generatePaddingClasses(paddings: number[]): string {
+	let result = '';
+	paddings.forEach((padding, index) => {
+		switch (index) {
+			case 0:
+				result += `px-${padding} `;
+				break;
+			case 1:
+				result += `md:px-${padding} `;
+				break;
+			case 2:
+				result += `lg:px-${padding} `;
+				break;
+			default:
+				break;
+		}
+	});
+	return result;
+}
+
+const p = generatePaddingClasses(paddings);
 ---
 
-<div class={`mx-auto px-4 md:px-6 lg:px-8 w-full max-w-[1400px] ${className}`}>
+<div
+	style={`max-width: ${maxWidth}px`}
+	class={clsx('mx-auto  w-full', p,  className)}>
 	<slot />
 </div>

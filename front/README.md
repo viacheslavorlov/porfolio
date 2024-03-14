@@ -4,13 +4,13 @@ This template shows how you can use Keystatic in an Astro site.
 
 To setup:
 
-```bash
+```shell
 npm install
 ```
 
 To run:
 
-```
+```shell
 npm run dev
 ```
 
